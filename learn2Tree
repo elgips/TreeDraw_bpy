@@ -1,0 +1,2 @@
+import bpy
+bpy.ops.mesh.primitive_cylinder_add(vertices=256, radius=1.5, depth=8, end_fill_type='NGON', calc_uvs=True, enter_editmode=False, align='WORLD', location=(0, 0, 0), rotation=(0, 0, 0), scale=(0, 0, 0))

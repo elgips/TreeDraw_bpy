@@ -1,7 +1,7 @@
 import os
-import bpy,bmesh
+#import bpy,bmesh
 import numpy as np
-from mathutils import Euler, Matrix, Quaternion, Vector
+#from mathutils import Euler, Matrix, Quaternion, Vector
 os.chdir('/home/gips/Documents/PreDoc/coding/BLENDPY')
 def createBranch(_diam,_P1,_P2,index):
 #    bpy.ops.curve.primitive_nurbs_curve_add(enter_editmode=False, align='WORLD', location=(0, 0, 0), scale=(1, 1, 1))
@@ -34,38 +34,38 @@ class ELEMENT:
             self.width=float(_width)
 list_nodes = [] 
 list_elements = [] 
-file1=open("node_list_test.txt","r")
+file1=open("Points.txt","r")
 myline = file1.readline()
 while myline:
     if myline[0]!= "#":
         if myline.count("*NODE") == 1:
             myline = file1.readline()
             while myline != "*END":
-                index=myline[1:10]
-                x=myline[11:20]
-                y=myline[21:30]
-                z=myline[31:40]
+                index=myline[1:12]
+                x=myline[13:24]
+                y=myline[25:36]
+                z=myline[37:48]
                 list_nodes.append(NODE(index,x,y,z))
                 myline = file1.readline()
     myline = file1.readline()
 #print(list_nodes[1].index)
 file1.close()
-file2=open("element_list_test.txt","r")
+file2=open("Streams.txt","r")
 myline = file2.readline()
 while myline:
     if myline[0]!= "#":
         if myline.count("*ELEMENT_BEAM") == 1:
             myline = file2.readline()
             while myline.count("*END") ==0 :
-                index=myline[1:10]
-                n1=myline[11:20]
-                n2=myline[21:30]
-                width=myline[31:40]
+                index=myline[1:12]
+                n1=myline[13:24]
+                n2=myline[25:36]
+                width=myline[37:48]
                 list_elements.append(ELEMENT(index,n1,n2,width))
                 myline = file2.readline()
     myline = file2.readline()
-#for i in list_nodes:
-#    print(i.index)
+for i in list_nodes:
+    print(i.index)
 for i in list_elements:
     V1=Vector((list_nodes[i.n1-1].x, list_nodes[i.n1-1].y, list_nodes[i.n1-1].z))
     V2=Vector((list_nodes[i.n2-1].x, list_nodes[i.n2-1].y, list_nodes[i.n2-1].z))
